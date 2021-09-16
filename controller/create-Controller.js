@@ -1,5 +1,8 @@
 var createModel=require('../querybuilder/create-model');
 var db=require('../database');
+const bodyParser= require('body-parser');
+var req = require('request');
+
 module.exports={
     readData:function(req,res) {
 
@@ -16,14 +19,24 @@ module.exports={
         // console.log('cont', data);
     },
     createData:function(req,res){
-        const inputData={
-            name :req.body.name,
-            quote :req.body.quote
+        console.log("req.body",req.bodyParser);
+        const inputdata={
+            name :req.bodyParser.name,
+            quote :req.bodyParser.quote
         };
-        createModel.createData(inputData,function(data){
-            res.redirect('route/read');
-            console.log(data.affectedRows + " record created");
+        var sql ='INSERT INTO quotes SET ?';
+        con.query(sql,inputdata,function(err,data){
+        if(err) console.log(err);
+        else {
+                console.log(data.affectedRows + " record created");
+            }
         });
+        res.redirect('/');
+      
+        // createModel.createData(inputData,function(data){
+        //     res.redirect('/');
+        //     console.log(data.affectedRows + " record created");
+        // });
     }
 
 }
