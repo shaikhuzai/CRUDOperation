@@ -27,23 +27,23 @@ app.set('view engine', 'ejs');
 //           res.render('index.ejs', {fetchData:data})
 //          });
 //     });
-//     app.post('/quotes', (req, res) => {
+   //  app.post('/quotes', (req, res) => {
 
-//         const inputdata={
-//             name :req.body.name,
-//             quote :req.body.quote
-//         };
-//         var sql ='INSERT INTO quotes SET ?';
-//         con.query(sql,inputdata,function(err,data){
-//             if(err) console.log(err);
-//             else {
-//                 console.log(data.affectedRows + " record created");
-//             }
-//         });
-//         res.redirect('/');
-//         console.log(req.body)
-//       });
-
+   //      const inputdata={
+   //          name :req.body.name,
+   //          quote :req.body.quote
+   //      };
+   //      var sql ='INSERT INTO quotes SET ?';
+   //      con.query(sql,inputdata,function(err,data){
+   //          if(err) console.log(err);
+   //          else {
+   //              console.log(data.affectedRows + " record created");
+   //          }
+   //      });
+   //      res.redirect('/');
+   //      console.log(req.body)
+   //    });
+// 
 //   //});
  app.listen(3000, function() {
     console.log('listening on 3000')

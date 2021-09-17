@@ -24,8 +24,8 @@ th, td {
 <body>
   <h1> May Node and Express be with you. </h1>
   <form action="/route/read" method="POST">
-    <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="quote" name="quote">
+    <input type="text" placeholder="name" name="name" required value="<%=(typeof fetchData!='undefined')? fetchData.name:''%>">
+    <input type="text" placeholder="quote" name="quote" required value="<%=(typeof fetchData!='undefined')? fetchData.quote:''%>">
     <button type="submit">Submit</button>
   </form>
     <div class="table-data">
@@ -45,8 +45,8 @@ th, td {
         <tr>
             <td><%=data.name %></td>
             <td><%=data.quote %></td>
-            <td><a href="#">Edit</a></td>
-            <td><a href="#" onclick="deletebyname(data)">Delete</a>
+            <td><a href="/route/edit/<%=data.name%>" >Edit</a></td>
+            <td><a href="/route/delete/<%=data.name%>" >Delete</a></td>
         </tr>
         <%  i++; }) %>
         <% } else{ %>
@@ -55,13 +55,6 @@ th, td {
             </tr>
         <% } %>
     </table>
-    </div>
-    <div>
-      <h2>Darth Vadar invades!</h2>
-      <p>
-        Replace first Yoda's quote with a quote written by Darth Vadar
-      </p>
-      <button id="update-button">Replace Yoda's quote</button>
     </div>
 <script src="../database.js"></script>
 </body>

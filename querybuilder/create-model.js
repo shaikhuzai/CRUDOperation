@@ -2,12 +2,13 @@ var db=require('../database');
 
 module.exports = {
     createData:function(inputData,callback){
+        console.log('in createData model',inputData);
         var sql ='INSERT INTO quotes SET ?';
         db.query(sql,inputData,function(err,data){
             if(err)  console.log(err);
-            else {
+            else 
                 return callback(data);
-            }
+            console.log('exit createData model createData' ,data);
         });
     },
     readData:function() {
@@ -17,5 +18,14 @@ module.exports = {
             if (err) console.log(err);
             return data;
         });
-    }
+    },
+    deleteData(deletename,callback){
+        console.log('in deleteData model',deletename);
+        var sql = 'DELETE FROM quotes WHERE name = ?';
+        db.query(sql,deletename, function (err, data) {
+            if (err) console.log(err);
+            else 
+                return callback(data);
+          });   
+    },
 }
