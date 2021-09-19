@@ -5,18 +5,22 @@ module.exports = {
         console.log('in createData model',inputData);
         var sql ='INSERT INTO quotes SET ?';
         db.query(sql,inputData,function(err,data){
-            if(err)  console.log(err);
-            else 
+            if(err)  {console.log(err);}
+            else {
+                console.log('exit createData model createData' ,data);
                 return callback(data);
-            console.log('exit createData model createData' ,data);
+            }
         });
     },
-    readData:function() {
+    readData:function(callback) {
         var sql='SELECT * FROM quotes';
-        db.query(sql, function (err, data, fields) {
+        db.query(sql, function (err, data) {
             console.log('query:'+data)
-            if (err) console.log(err);
-            return data;
+            if(err) {console.log(err);}
+            else {
+                console.log('exit readData model createData' ,data);
+                return callback(data);
+            }
         });
     },
     deleteData(deletename,callback){
@@ -28,4 +32,13 @@ module.exports = {
                 return callback(data);
           });   
     },
+    editData(editname,callback){
+        console.log('in editData model',editname);
+        var sql='SELECT * FROM quotes where name = ?';
+        db.query(sql,editname, function (err, data, fields) {
+            if (err) console.log(err);
+            else 
+                return callback(data);
+        });
+    }
 }

@@ -6,23 +6,22 @@ const express = require('express');
 //const { request } = require('express');
 
 module.exports={
-    readData:function(req,res) {
+    readData:(req,res) => {
 
-        var sql='SELECT * FROM quotes';
-        db.query(sql, function (err, data, fields) {
-            //console.log('query:'+data)
-            if (err) console.log(err);
-            else res.render('index.ejs', {fetchData: data});
+        console.log('in readData controller');
+        createModel.readData(function (data) {
+            var editValue;
+            res.render('index.ejs', {data :{fetchData: data,editData:''}});
         });
     },
-    createData(inputdata,res){
+    createData(inputdata,res) {
         console.log('in createData controller',inputdata);
         createModel.createData(inputdata,function(data){
             res.redirect('/route');
             console.log(data.affectedRows + " record created");
         });
     },
-    deleteData:function(req,res){
+    deleteData: (req,res) => {
         const deletename=req.params.name;
         console.log('in deleteData controller ',deletename);
         createModel.deleteData(deletename,function(data){
@@ -31,14 +30,20 @@ module.exports={
         });
        
       },
-      editData:function(req,res) {
+      editData: (req,res) =>{
         const editname=req.params.name;
-        var sql='SELECT * FROM quotes where name = ?';
-        db.query(sql,editname, function (err, data, fields) {
-            if (err) console.log(err);
-            else 
-                res.render('index.ejs',{fetchData: data});
+        var fetchValue,editValue;
+        createModel.readData(function (data){
+            fetchValue=data;
+            console.log('fetchData is ',fetchValue);
+            createModel.editData(editname,function (data){
+                editValue=data;
+                console.log('editdata  is ',editValue);
+                console.log('fetchData2 is ',fetchValue);
+
+                res.render('index.ejs',{data :{fetchData: fetchValue,editData:editValue}});
+            });
+
         });
       }
-
 }
