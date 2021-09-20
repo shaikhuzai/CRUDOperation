@@ -40,5 +40,17 @@ module.exports = {
             else 
                 return callback(data);
         });
+    },
+    updateData(inputdata,updatename,callback){
+        console.log('in updateData model',inputdata +' '+updatename);
+        var sql = `UPDATE quotes SET ? WHERE name= ?`;
+        db.query(sql,[inputdata,updatename],function(err,data){
+
+            if(err) console.log(err);
+            else {
+                console.log('exit updateData model' ,data);
+                return callback(data);
+            }
+        });
     }
 }

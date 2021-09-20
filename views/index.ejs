@@ -23,9 +23,8 @@ th, td {
 </head>
 <body>
   <h1> May Node and Express be with you. </h1>
-  <form action="/route/read" method="POST">
-    <% var len=data.editData.length; 
-        var editname,editquote;
+   <% var len=data.editData.length; 
+        var editname,editquote,url;
         console.log('data.editData.length',len);
         if(len!=0){
           var i=1;
@@ -36,9 +35,18 @@ th, td {
             console.log('editquote is ',editquote);
           });
         }
+        if(len!=0){
+          url='/route/update/'+editname;
+          console.log('update url' ,url);
+        }
+        else{
+          url='/route/read';
+          console.log('read url',url);
+        }
     %>
-    <input type="text" placeholder="name" name="name" required value="<%=(typeof len!=0)? editname:''%>">
-    <input type="text" placeholder="quote" name="quote" required value="<%=(typeof len!=0)? editquote:''%>">
+  <form action="<%=url %>" method="POST">
+    <input type="text" placeholder="name" name="name" required value="<%=(typeof len!=0) ? editname : ''%>">
+    <input type="text" placeholder="quote" name="quote" required value="<%=(typeof len!=0) ? editquote:  ''%>">
     <button type="submit">Submit</button>
   </form>
     <div class="table-data">

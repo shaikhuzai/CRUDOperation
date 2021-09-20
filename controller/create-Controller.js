@@ -45,5 +45,14 @@ module.exports={
             });
 
         });
+      },
+      updateData(inputdata,res,req){
+
+        console.log('in update controller',inputdata);
+        const updatename=req.params.name;
+        createModel.updateData(inputdata,updatename,function(data){
+            res.redirect('/route');
+            console.log(data.affectedRows + " record updated");
+        });
       }
 }

@@ -13,6 +13,14 @@ router.post('/read', (req,res) =>{
     };
     createController.createData(inputdata,res);
 });
+router.post('/update/:name',(req,res) => {
+    const inputdata={
+        name :req.body.name,
+        quote :req.body.quote
+    };
+    createController.updateData(inputdata,res,req);
+});
+//router.post('/update/:name', createController.updateData);
 router.get('/delete/:name', createController.deleteData);
 router.get('/edit/:name', createController.editData);
 module.exports = router;
